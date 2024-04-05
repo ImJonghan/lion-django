@@ -16,6 +16,7 @@ class Post(models.Model):
         verbose_name_plural = 'posts'
         db_table = 'blog_posts'
         ordering=('-modify_dt',)
+        
     def __str__(self):
         return self.title
     def get_absolute_url(self):
