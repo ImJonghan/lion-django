@@ -1,24 +1,50 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Post All{% endblock %}
+
+{%block content%}
 <h1>BLOG POST LIST</h1>
 <br>
-{% for post in posts %}
-<h3><a href={% url 'blog:post_detail' post.slug %}>{{post.title}}</a> </h3>
-{# <h3><a href="{{post.get_absolute_url}}">{{post.title}}</a> </h3> #}
-{{post.modify_dt | date:"Y년 N d일" }}
-<p>{{post.content}}</p>
-{% endfor %}
+<div class="row">
 
+    {% for post in posts %}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{post.title |truncatechars:13}}</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">{{post.content|truncatechars:20}}</h6>
+            <a href="{% url 'blog:post_detail' post.slug %}" class="card-link">Detail link</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 <br>
 
 <div>
-    <span>
-        {% if page_obj.has_previous %}
-            <a href="?page={{ page_obj.previous_page_number }}">PreviousPage</a>
-        {% endif %}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a href="?page={{ page_obj.previous_page_number }}" class="page-link">PreviousPage</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a href="#" class="page-link">PreviousPage</a>
+            </li>
+            {% endif %}
+            <li class="page-item"><a class="page-link" href="#">Page {{ page_obj.number }} of {{page_obj.paginator.num_pages }}</a></li>
 
-        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">NextPage</a>
-        {% endif %}
-    </span>
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a href="?page={{ page_obj.next_page_number }}" class="page-link">NextPage</a>
+                {% else %}
+            <li class="page-item disabled">
+                <a href="#" class="page-link">NextPage</a>
+            </li>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
 </div>
+{% endblock %}

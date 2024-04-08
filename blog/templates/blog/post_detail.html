@@ -1,22 +1,33 @@
-<h2>{{ object.title }}</h2>
+{% extends 'base.html' %}
 
-<p>
-    {% if object.get_previous %}
-    <a href="{{ object.get_previous.get_absolute_url }}" title="View previous post">
-        &laquo;-- {{ object.get_previous }}
-    </a>
-    {% endif %}
+{% load static %}
 
-    {% if object.get_next %}
-    | <a href="{{ object.get_next.get_absolute_url }}" title="View next post">
-    {{ object.get_next }} --&raquo;
-    </a>
-    {% endif %}
-</p>
+{% block title %}Post Detail{% endblock %}
 
-<p>{{ object.modify_dt|date:"j F Y" }}</p>
-<br>
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <h1 class="mb-4">{{ post.title }}</h1>
+            <p class="text-muted">게시일: {{ object.modify_dt|date:"j F Y" }}</p>
+            <div class="post-content mt-4">
+                {{ object.content|linebreaks }}
+            </div>
+        </div>
+    </div>
+    <p class="container">
+        {% if object.get_previous %}
+        <a href="{{ object.get_previous.get_absolute_url }}" title="View previous post">
+            &laquo;-- {{ object.get_previous }}
+        </a>
+        {% endif %}
+    
+        {% if object.get_next %}
+        | <a href="{{ object.get_next.get_absolute_url }}" title="View next post">
+        {{ object.get_next }} --&raquo;
+        </a>
+        {% endif %}
+        </p>
+</div
 
-<div>
-    {{ object.content|linebreaks }}
-</div>
+{%endblock%}

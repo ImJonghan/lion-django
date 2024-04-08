@@ -1,3 +1,10 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Post All{% endblock %}
+
+{%block content%}
 <h1>Archive List {% now "Y m d" %}</h1>
 
 <ul>
@@ -17,7 +24,4 @@
         {% endfor %}
     </ul>
 </div>
-
-{{date_list}}
-
-{{object_list}}
+{%endblock%}
