@@ -1,7 +1,8 @@
-{% extends 'base_tutorial.html' %}
+{% extends 'base.html' %}
 
 {% load static %}
-{% block title %}재밌는 장고 공부{% endblock %}
+{% block title %}Home Template{% endblock %}
+
 {% block extra-style %}
 <style type="text/css">
     .home-image {
@@ -25,4 +26,16 @@
         font-style: italic;
     }
     </style>
+{% endblock %}
+
+{% block content %}
+<div class="home-image">
+    <h2 class="title">Python Web Programming</h2>
+</div>
+{% endblock %}
+<h1>이 내용도 넣어주세요!!</h1>
+{% block footer %}
+<footer class="fixed-bottom bg-warning">
+    <h4>This is Footer area.</h4>
+</footer>
 {% endblock %}
