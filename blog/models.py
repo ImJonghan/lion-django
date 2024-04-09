@@ -28,3 +28,11 @@ class Post(models.Model):
     def get_next(self):
         return self.get_next_by_modify_dt()
     
+"""
+# Question과 Choice 구조와 같습니다.
+class Comment(models.Model):
+    # user
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    comment = models.CharField(max_length=200)
+    # date ....
+"""   
