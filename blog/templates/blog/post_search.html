@@ -6,7 +6,9 @@
 <br>
 <form action="."  method="post">
     {% csrf_token %}
-    {{form.as_table}}
+    <div class="input-group mb-3">
+        {{form.as_table}}
+    </div>
     <input type="submit" value="검색" class="btn btn-primary">
 </form>
 

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # 새로 입력
     'taggit.apps.TaggitAppConfig',
     'taggit_templatetags2',
+    'photo',
 ]
 
 MIDDLEWARE = [
