@@ -1,5 +1,6 @@
 from typing import Any
 from django.db.models.query import QuerySet
+from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Post
 from django.views.generic import ListView, DetailView, ArchiveIndexView, YearArchiveView, MonthArchiveView, DayArchiveView, TodayArchiveView
@@ -81,3 +82,24 @@ class TaggedObjectLV(ListView):
         context['tagname'] = self.kwargs['tag']
         return context
     
+from django.views.generic import FormView
+from blog.forms import PostSearchForm
+from django.db.models import Q
+
+class SearchFormView(FormView):
+    form_class = PostSearchForm
+    template_name = 'blog/post_search.html'
+
+    def form_valid(self, form: Any) -> HttpResponse:
+        # 검색어 확인
+        searchWord = form.cleaned_data['search_word']
+        # Q를 통해 검색하고
+        post_list = Post.objects.filter(Q(title__icontains=searchWord) | Q(description__icontains=searchWord) | Q(content__icontains=searchWord)).distinct()
+        # 결과를 담아
+        context = {}
+        context['form'] = form
+        context['search_term'] = searchWord
+        context['object_list'] = post_list
+        # 페이지에 전달
+        return render(self.request, self.template_name, context)
+

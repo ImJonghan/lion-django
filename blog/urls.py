@@ -28,4 +28,6 @@ urlpatterns = [
     path('archive/today/', views.PostTAV.as_view(), name='post_today_archive'),
     path('tag/', views.TagCloudTV.as_view(), name='tag_cloud'),
     path('tag/<str:tag>/', views.TaggedObjectLV.as_view(), name='tagged_object_list'),
+    
+    path('search/', views.SearchFormView.as_view(), name='search'),
 ]
