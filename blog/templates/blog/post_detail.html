@@ -14,6 +14,18 @@
                 {{ object.content|linebreaks }}
             </div>
         </div>
+    </div>    
+
+    <br>
+    <div>
+        <b>TAGS</b> <i class="fas fa-tag"></i>
+        {% load taggit_templatetags2_tags %}
+        {% get_tags_for_object object as "tags" %}
+        {% for tag in tags %}
+        <a href="{% url 'blog:tagged_object_list' tag.name %}">{{tag.name}}</a>
+        {% endfor %}
+	&emsp;
+        <a href="{% url 'blog:tag_cloud' %}"> <span class="btn btn-info btn-sm">TagCloud</span> </a>
     </div>
     <p class="container">
         {% if object.get_previous %}
@@ -21,7 +33,6 @@
             &laquo;-- {{ object.get_previous }}
         </a>
         {% endif %}
-    
         {% if object.get_next %}
         | <a href="{{ object.get_next.get_absolute_url }}" title="View next post">
         {{ object.get_next }} --&raquo;

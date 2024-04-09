@@ -1,5 +1,6 @@
 from django.db import models
-from django.urls import reverse
+from django.urls import reverse 
+from taggit.managers import TaggableManager # 추가
 # Create your models here.
 # id, title, slug, description, content, create_dt, modify_dt
 
@@ -10,6 +11,7 @@ class Post(models.Model):
     content = models.TextField("CONTENT")
     create_dt = models.DateTimeField("CREATE DATE", auto_now_add=True)
     modify_dt = models.DateTimeField("MODIFY DATE", auto_now=True)
+    tags = TaggableManager(blank=True) # 추가
 
     class Meta:
         verbose_name = 'post'
@@ -25,3 +27,4 @@ class Post(models.Model):
         return self.get_previous_by_modify_dt()
     def get_next(self):
         return self.get_next_by_modify_dt()
+    

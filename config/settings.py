@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bookmark.apps.BookmarkConfig',
     'blog',
+    # 새로 입력
+    'taggit.apps.TaggitAppConfig',
+    'taggit_templatetags2',
 ]
 
 MIDDLEWARE = [
@@ -77,14 +80,21 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'lion_imjonghan',
-        'USER': 'postgres',
-        'PASSWORD': 'G=nf_-}EKl',
-        'HOST': 'hanslab.org',  # 또는 PostgreSQL 서버의 IP 주소
-        'PORT': '25432',       # PostgreSQL의 기본 포트 번호
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR/'db.sqlite3'
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'lion_imjonghan',
+#         'USER': 'postgres',
+#         'PASSWORD': 'G=nf_-}EKl',
+#         'HOST': 'hanslab.org',  # 또는 PostgreSQL 서버의 IP 주소
+#         'PORT': '25432',       # PostgreSQL의 기본 포트 번호
+#     }
+# }
 
 
 # Password validation
@@ -132,3 +142,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 import os
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # BASE_DIR/'media'
+
+TAGGIT_CASE_INSENSITIVE=True
+TAGGIT_LIMIT=50
