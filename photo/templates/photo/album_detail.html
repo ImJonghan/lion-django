@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Album Detail{% endblock %}
+
+{%block content%}
+<div class="mt-5">
+    <span class="h2">{{object.name}}</span>
+    <span class="h5">{{object.description}}</span>
+</div>
+
+<div class="row"> 
+    {% for photo in object.photo_set.all|slice:":4" %} 
+    <div class="ml-5 col-sm-3"> 
+        <div class="thumbnail">
+            <a href="{{ photo.get_absolute_url }}">
+                <img src="{{ photo.image.thumb_url }}" style="width: 100%;">
+            </a>
+        </div>
+        <ul>
+            <li class="h5">{{photo.title}}</li>
+            <li>{{photo.description}}</li>
+            
+        </ul>
+    </div>
+    {% endfor %} 
+</div>
+{% endblock %}
